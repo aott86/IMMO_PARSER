@@ -9,9 +9,9 @@ class HouseDao:
         return class_._instance
 
     def __init__(self):
-        mongoUrl = sys.argv[1]
+        mongoUrl = sys.argv[2]
         self.client = MongoClient(mongoUrl)
-        self.db = self.client['LBC']
+        self.db = self.client['IMMO_DB']
         self.coll = self.db['houses']
 
     def update(self, findDoc, updateDoc):

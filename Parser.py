@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import pdfkit
 import re
 import sys
+import logging
 
 from HouseDao import HouseDao
 
@@ -15,8 +16,9 @@ class Parser(ABC):
         pass
 
     def __init__(self):
+        self.logger = logging.getLogger("IMMO_PARSER")
         self.pdfKitConfig = pdfkit.configuration(
-            wkhtmltopdf=bytes(sys.argv[0], 'utf-8'))
+            wkhtmltopdf=bytes(sys.argv[1], 'utf-8'))
         self.houseDao = HouseDao();
 
     def createNewHouse(self,house):
@@ -26,17 +28,17 @@ class Parser(ABC):
             pdf = pdfkit.from_url(house.link, False, configuration=self.pdfKitConfig)
             self.houseDao.addPdf(house.id, pdf)
         except IOError:
-            print ('ERROR generating pdf for house '+house.id)
+            self.logger.exception ('ERROR generating pdf for house '+house.id)
 
     def createOrUpdateHouse(self,house):
-        print(house.title)
+        self.logger.info(house.title)
         if house.isHouse():
-            print(house.city, "\t",house.price, "\t", house.id)
+            self.logger.info(house.city, "\t",house.price, "\t", house.id)
             result = self.houseDao.updateHouseParsed(house);
 
             # If exists
             if result['n'] == 0:
-                print("NEW " + house.id)
+                self.logger.info("NEW " + house.id)
                 self.createNewHouse(house)
 
     def normalizeCity(self,cityName):
