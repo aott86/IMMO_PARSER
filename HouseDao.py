@@ -10,8 +10,7 @@ class HouseDao:
 
     def __init__(self):
         mongoUrl = sys.argv[1]
-        mongoPort = sys.argv[2]
-        self.client = MongoClient('mongodb://' + mongoUrl + ':' + mongoPort + '/')
+        self.client = MongoClient(mongoUrl)
         self.db = self.client['LBC']
         self.coll = self.db['houses']
 

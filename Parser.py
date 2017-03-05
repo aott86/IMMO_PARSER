@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 import pdfkit
 import re
+import sys
 
 from HouseDao import HouseDao
-
 
 class Parser(ABC):
     @abstractmethod
@@ -16,7 +16,7 @@ class Parser(ABC):
 
     def __init__(self):
         self.pdfKitConfig = pdfkit.configuration(
-            wkhtmltopdf=bytes('D:\Programmation\PyCharmProjects\wkhtmltopdf\\bin\wkhtmltopdf.exe', 'utf-8'))
+            wkhtmltopdf=bytes(sys.argv[0], 'utf-8'))
         self.houseDao = HouseDao();
 
     def createNewHouse(self,house):

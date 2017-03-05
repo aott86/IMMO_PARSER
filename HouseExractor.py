@@ -11,7 +11,7 @@ from SeLogerParser import SeLogerParser
 
 if  len(sys.argv) != 4:
     print ('Wrong number of arguments', len(sys.argv))
-    print ('usage: HouseExtractor.py  <mongodb-host> <mongodb-port> <path to url file>')
+    print ('usage: HouseExtractor.py  <path to wkhtmltopdf> <mongodb-url> <path to url file>')
     sys.exit(-1)
 
 def chooseParser(url):

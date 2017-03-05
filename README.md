@@ -8,7 +8,7 @@ Main class to run:
 
 ### conf.txt
 Contains a list of url to parse. One url by line.
-The web site's domain will idicates which parser to use.
+The web site's domain will indicates which parser to use.
 Supported web sites domains:
 https://www.leboncoin.fr/
 http://www.logic-immo.com/
