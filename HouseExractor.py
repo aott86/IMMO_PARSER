@@ -12,7 +12,7 @@ from LogicImmoParser import LogicImmoParser
 from SeLogerParser import SeLogerParser
 
 
-logging.config.fileConfig(sys.argv[5])
+logging.config.fileConfig(sys.argv[4])
 
 # create logger
 logger = logging.getLogger('IMMO_PARSER')

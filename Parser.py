@@ -28,17 +28,17 @@ class Parser(ABC):
             pdf = pdfkit.from_url(house.link, False, configuration=self.pdfKitConfig)
             self.houseDao.addPdf(house.id, pdf)
         except IOError:
-            self.logger.exception ('ERROR generating pdf for house '+house.id)
+            self.logger.exception ('ERROR generating pdf for house '+str(house.id))
 
     def createOrUpdateHouse(self,house):
         self.logger.info(house.title)
         if house.isHouse():
-            self.logger.info(house.city, "\t",house.price, "\t", house.id)
+            self.logger.info(house.city+"\t"+str(house.price)+"\t"+str(house.id))
             result = self.houseDao.updateHouseParsed(house);
 
             # If exists
             if result['n'] == 0:
-                self.logger.info("NEW " + house.id)
+                self.logger.info("NEW " + str(house.id))
                 self.createNewHouse(house)
 
     def normalizeCity(self,cityName):
