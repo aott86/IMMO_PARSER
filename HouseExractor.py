@@ -10,7 +10,9 @@ from HouseDao import HouseDao
 from LBCParser import LBCParser
 from LogicImmoParser import LogicImmoParser
 from SeLogerParser import SeLogerParser
+from datetime import datetime
 
+launchDate= datetime.now();
 
 logging.config.fileConfig(sys.argv[4])
 
@@ -58,12 +60,8 @@ for f in open(sys.argv[3]):
         load_url(url)
 
 houseDao = HouseDao()
-houseCheckDeletion = houseDao.getUndeletedHouses()
-logger.info('Nb house not deleted: ' + str(houseCheckDeletion.count()))
-for house in houseCheckDeletion:
-    try:
-        urllib.request.urlopen(house['link'])
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            logger.info ('House is deleted: '+house['_id'])
-            houseDao.updateHouseDeleted(house['_id'])
+houseDeleted = houseDao.getDeletedHouses(launchDate)
+logger.info('Nb house deleted: ' + str(houseDeleted.count()))
+for house in houseDeleted:
+    logger.info ('House is deleted: '+house['_id'])
+    houseDao.updateHouseDeleted(house['_id'])

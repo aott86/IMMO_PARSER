@@ -35,5 +35,5 @@ class HouseDao:
         return self.coll.update({"_id": houseId}, {"$set": {"deleted":True}},
                          upsert=False);
 
-    def getUndeletedHouses(self):
-        return self.coll.find({'deleted':False});
+    def getDeletedHouses(self, launchDate):
+        return self.coll.find({'deleted':False, 'date_last':{'$lt', launchDate}});
