@@ -36,4 +36,4 @@ class HouseDao:
                          upsert=False);
 
     def getDeletedHouses(self, launchDate):
-        return self.coll.find({'deleted':False, 'date_last':{'$lt', launchDate}});
+        return self.coll.find({"deleted":False, "date_last":{"$lt": launchDate}});
