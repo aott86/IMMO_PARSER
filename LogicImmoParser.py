@@ -59,8 +59,10 @@ class LogicImmoParser(Parser):
             house.surface = int(superficieHtml.get_text())
 
         priceHtml = oneHouseHtml.find(class_='main-price')
-        if priceHtml:
+        if priceHtml and len(findNumber.findall(trim.sub('',priceHtml.get_text())))>0:
             house.price = int(findNumber.findall(trim.sub('',priceHtml.get_text()))[0])
+        else:
+            house.price = 999999
 
         cityHtml = oneHouseHtml.find(class_='offer-locality')
         if cityHtml:

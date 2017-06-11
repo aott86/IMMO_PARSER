@@ -11,7 +11,7 @@ class HouseDao:
     def __init__(self):
         mongoUrl = sys.argv[2]
         self.client = MongoClient(mongoUrl)
-        self.db = self.client['IMMO_DB']
+        self.db = self.client.get_default_database()
         self.coll = self.db['houses']
 
     def update(self, findDoc, updateDoc):
