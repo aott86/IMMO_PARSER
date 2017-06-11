@@ -42,6 +42,8 @@ class Parser(ABC):
                 self.createNewHouse(house)
 
     def normalizeCity(self,cityName):
+        cityName = cityName.replace("è", "e")
+        cityName = cityName.replace("é", "e")
         cityName = re.sub('[^a-zA-Z- ]', '', cityName)
         cityName = cityName.replace(" ", "-")
         cityName = cityName.upper()
